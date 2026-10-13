@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>المساعد القانوني | نظام الإجراءات الجزائية السعودي</title>
+
+    <meta
+        name="description"
+        content="استفسر عن نظام الإجراءات الجزائية السعودي ولائحته التنفيذية من خلال المساعد القانوني."
+    >
+
+    <link
+        rel="icon"
+        type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d4035'/%3E%3Cpath d='M16 7v18M8 11h16M7 12l-3 7h6zm18 0-3 7h6zM10 25h12' fill='none' stroke='%23ffffff' stroke-width='1.5'/%3E%3C/svg%3E"
+    >
+
+    <script>
+        try {
+            if (localStorage.getItem("legal-assistant-theme") === "dark") {
+                document.documentElement.dataset.theme = "dark";
+            }
+        } catch {}
+    </script>
+
+    <link rel="stylesheet" href="/style.css">
+    <script src="/session.js"></script>
+
+    <script>
+        document.documentElement.style.visibility = "hidden";
+        window.LegalSession.requireSession();
+    </script>
+
+    <script src="/templates/chat.js" defer></script>
+</head>
+
+<body>
+
+    <!-- SVG icons -->
+    <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+
+            <symbol id="scales" viewBox="0 0 32 32">
+                <path d="M16 5v22M7 10h18M7 11l-4 9c2 3 6 3 8 0l-4-9Zm18 0-4 9c2 3 6 3 8 0l-4-9ZM10 27h12"/>
+            </symbol>
+
+            <symbol id="arrow" viewBox="0 0 24 24">
+                <path d="m14 6-6 6 6 6M8 12h12"/>
+            </symbol>
+
+            <symbol id="menu" viewBox="0 0 24 24">
+                <path d="M4 6h16M4 12h16M4 18h16"/>
+            </symbol>
+
+            <symbol id="user" viewBox="0 0 24 24">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/>
+            </symbol>
+
+            <symbol id="plus" viewBox="0 0 24 24">
+                <path d="M12 5v14M5 12h14"/>
+            </symbol>
+
+            <symbol id="history" viewBox="0 0 24 24">
+                <path d="M3 12a9 9 0 1 0 3-6.7"/>
+                <path d="M3 4v5h5M12 7v5l3 2"/>
+            </symbol>
+
+            <symbol id="logout-icon" viewBox="0 0 24 24">
+                <path d="M10 17l5-5-5-5M15 12H3M14 4h5a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-5"/>
+            </symbol>
+
+            <symbol id="close" viewBox="0 0 24 24">
+                <path d="M6 6l12 12M18 6 6 18"/>
+            </symbol>
+
+        </defs>
+    </svg>
+
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+
+            <a
+                class="brand"
+                href="chat.html"
+                aria-label="المساعد القانوني، الصفحة الرئيسية"
+            >
+                <span class="brand-icon">
+                    <svg>
+                        <use href="#scales"/>
+                    </svg>
+                </span>
+
+                <span>
+                    <strong>المساعد القانوني</strong>
+                    <small>نظام الإجراءات الجزائية السعودي</small>
+                </span>
+            </a>
+
+
+            <div class="header-end">
+
+                <!-- Menu -->
+                <button
+                    id="menu-toggle"
+                    class="menu-toggle"
+                    type="button"
+                    aria-label="فتح القائمة"
+                    aria-expanded="false"
+                >
+                    <svg>
+                        <use href="#menu"/>
+                    </svg>
+                </button>
+
+
+                <!-- Theme -->
+                <button
+                    id="theme-toggle"
+                    class="theme-toggle"
+                    type="button"
+                    aria-label="الوضع الداكن"
+                    aria-pressed="false"
+                >
+                    <svg
+                        class="moon-icon"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+                        <path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/>
+                    </svg>
+
+                    <svg
+                        class="sun-icon"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+                        <circle cx="12" cy="12" r="4"/>
+                        <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/>
+                    </svg>
+
+                    <span>داكن</span>
+                </button>
+
+
+                <!-- Language -->
+                <button
+                    id="language-toggle"
+                    class="language-toggle"
+                    type="button"
+                    lang="en"
+                    aria-label="Switch to English"
+                >
+                    English
+                </button>
+
+
+                <span class="scope">
+                    النظام واللائحة التنفيذية
+                </span>
+
+
+                <span id="connection" class="status" role="status">
+                    <i></i>
+                    <span>جاهز للاستفسار</span>
+                </span>
+
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Overlay -->
+    <div id="menu-overlay" class="menu-overlay" hidden></div>
+
+
+    <!-- Side Menu -->
+    <aside
+        id="side-menu"
+        class="side-menu"
+        aria-label="القائمة الرئيسية"
+        aria-hidden="true"
+    >
+
+        <div class="side-menu-header">
+
+            <div>
+                <strong>المساعد القانوني</strong>
+                <span id="menu-user-name"></span>
+            </div>
+
+            <button
+                id="menu-close"
+                class="menu-close"
+                type="button"
+                aria-label="إغلاق القائمة"
+            >
+                <svg>
+                    <use href="#close"/>
+                </svg>
+            </button>
+
+        </div>
+
+
+        <nav class="side-menu-nav">
+
+            <button
+                id="account-settings"
+                class="side-menu-item"
+                type="button"
+            >
+                <svg>
+                    <use href="#user"/>
+                </svg>
+
+                <span>إعدادات الحساب</span>
+            </button>
+
+
+            <button
+                id="new-chat"
+                class="side-menu-item"
+                type="button"
+            >
+                <svg>
+                    <use href="#plus"/>
+                </svg>
+
+                <span>محادثة جديدة</span>
+            </button>
+
+
+            <div class="history-section">
+
+                <div class="history-title">
+                    <svg>
+                        <use href="#history"/>
+                    </svg>
+
+                    <span>السجل</span>
+                </div>
+
+                <div
+                    id="history-list"
+                    class="history-list"
+                ></div>
+
+                <p
+                    id="history-empty"
+                    class="history-empty"
+                    hidden
+                >
+                    لا توجد محادثات سابقة.
+                </p>
+
+            </div>
+
+        </nav>
+
+
+        <button
+            id="logout"
+            class="side-menu-item logout-menu-item"
+            type="button"
+        >
+            <svg>
+                <use href="#logout-icon"/>
+            </svg>
+
+            <span>تسجيل الخروج</span>
+        </button>
+
+    </aside>
+
+
+    <!-- Account Settings -->
+    <div
+        id="account-modal"
+        class="account-modal"
+        hidden
+    >
+
+        <div
+            class="account-modal-card"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="account-title"
+        >
+
+            <div class="account-modal-header">
+
+                <div>
+                    <h2 id="account-title">
+                        إعدادات الحساب
+                    </h2>
+
+                    <p>
+                        يمكنك تعديل اسمك.
+                    </p>
+                </div>
+
+                <button
+                    id="account-close"
+                    class="menu-close"
+                    type="button"
+                    aria-label="إغلاق"
+                >
+                    <svg>
+                        <use href="#close"/>
+                    </svg>
+                </button>
+
+            </div>
+
+
+            <form id="account-form">
+
+                <label for="account-name">
+                    الاسم
+                </label>
+
+                <input
+                    id="account-name"
+                    type="text"
+                    maxlength="100"
+                    autocomplete="name"
+                    required
+                >
+
+                <p
+                    id="account-message"
+                    class="account-message"
+                    hidden
+                ></p>
+
+                <button
+                    id="account-save"
+                    class="account-save"
+                    type="submit"
+                >
+                    حفظ التغييرات
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+
+
+    <!-- Main workspace -->
+    <main class="workspace">
+
+        <div class="section-label">
+            <span>مساحة الاستفسارات القانونية</span>
+
+            <span class="label-note">
+                المعرفة أساس الوعي بالحقوق
+            </span>
+        </div>
+
+
+        <div
+            class="conversation-scroll"
+            id="scroll-area"
+        >
+
+            <!-- Welcome -->
+            <section
+                id="welcome"
+                class="welcome"
+                aria-labelledby="welcome-title"
+            >
+
+                <div class="welcome-mark">
+                    <svg>
+                        <use href="#scales"/>
+                    </svg>
+                </div>
+
+                <span class="eyebrow">
+                    نظام الإجراءات الجزائية · المملكة العربية السعودية
+                </span>
+
+                <h1 id="welcome-title">
+                    <span class="welcome-prefix">
+                        مرحباً بك في
+                    </span>
+
+                    <span>
+                        المساعد القانوني
+                    </span>
+                </h1>
+
+                <p>
+                    يمكنك الاستفسار عن نظام الإجراءات الجزائية
+                    السعودي ولائحته التنفيذية.
+                </p>
+
+
+                <div class="suggestions-heading">
+                    <span>ابدأ بسؤال</span>
+                    <span>أو اكتب استفسارك بالأسفل</span>
+                </div>
+
+
+                <div class="suggestions">
+
+                    <button class="suggestion" type="button">
+                        <span class="question-category">
+                            القبض على المتهم
+                        </span>
+
+                        <span class="question">
+                            متى يجوز القبض على المتهم؟
+                        </span>
+
+                        <svg>
+                            <use href="#arrow"/>
+                        </svg>
+                    </button>
+
+
+                    <button class="suggestion" type="button">
+                        <span class="question-category">
+                            مواد النظام
+                        </span>
+
+                        <span class="question">
+                            ما هي المادة 107 من النظام؟
+                        </span>
+
+                        <svg>
+                            <use href="#arrow"/>
+                        </svg>
+                    </button>
+
+
+                    <button class="suggestion" type="button">
+                        <span class="question-category">
+                            حقوق المتهم
+                        </span>
+
+                        <span class="question">
+                            ما هي حقوق المتهم عند القبض عليه؟
+                        </span>
+
+                        <svg>
+                            <use href="#arrow"/>
+                        </svg>
+                    </button>
+
+
+                    <button class="suggestion" type="button">
+                        <span class="question-category">
+                            الإجراءات القانونية
+                        </span>
+
+                        <span class="question">
+                            ما الفرق بين القبض والتوقيف وفق النظام؟
+                        </span>
+
+                        <svg>
+                            <use href="#arrow"/>
+                        </svg>
+                    </button>
+
+                </div>
+
+
+                <div class="source-note">
+
+                    <span class="source-line"></span>
+
+                    <span class="source-copy">
+                        استفسارات متخصصة في النظام ولائحته التنفيذية
+                    </span>
+
+                    <span class="source-line"></span>
+
+                </div>
+
+            </section>
+
+
+            <!-- Messages -->
+            <div
+                id="messages"
+                class="messages"
+                role="log"
+                aria-live="polite"
+                aria-relevant="additions"
+                aria-label="المحادثة"
+            ></div>
+
+        </div>
+
+
+        <!-- Composer -->
+        <div class="composer-region">
+
+            <form
+                id="question-form"
+                class="composer"
+            >
+
+                <label
+                    class="sr-only"
+                    for="question"
+                >
+                    سؤالك القانوني
+                </label>
+
+                <textarea
+                    id="question"
+                    dir="auto"
+                    rows="1"
+                    maxlength="12000"
+                    placeholder="اكتب سؤالك عن نظام الإجراءات الجزائية..."
+                ></textarea>
+
+
+                <div class="composer-bottom">
+
+                    <span>
+                        Enter للإرسال
+                        <span class="hint-divider">·</span>
+                        Shift + Enter لسطر جديد
+                    </span>
+
+                    <button
+                        id="send"
+                        class="send"
+                        type="submit"
+                        disabled
+                    >
+                        <span>إرسال</span>
+
+                        <svg>
+                            <use href="#arrow"/>
+                        </svg>
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <p class="disclaimer">
+
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="m12 3 8 4v6c0 5-8 8-8 8s-8-3-8-8V7l8-4Zm0 5v5m0 3v1"/>
+                </svg>
+
+                <span class="disclaimer-copy">
+                    المعلومات المقدمة عبر المساعد لأغراض الاسترشاد
+                    ولا تغني عن استشارة مختص قانوني.
+                </span>
+
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <span>المساعد القانوني</span>
+
+        <span>
+            نظام الإجراءات الجزائية السعودي ولائحته التنفيذية
+        </span>
+    </footer>
+
+</body>
+</html>

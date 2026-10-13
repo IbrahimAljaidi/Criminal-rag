@@ -1,16 +1,14 @@
-from rag.rag_service import ask
-while True:
-    question = input("اكتب سؤالك: ")
+import uvicorn
 
-    answer = ask(question)
-    print("\nالإجابة:")
-    print(answer)
 
-    again=input("هل لديك سؤال أخر ؟(نعم/لا):")
-    if again.lower() in ["لا","شكرا","لا شكرا"]:
-        print("شكرا لاستخدامك الخدمة. إلى اللقاء!")
-        break
-    elif again.lower() in ["نعم","أكيد","بالطبع"]:
-        continue
-    else:
-        print("الرجاء كتابة نعم أو لا.")
+def main():
+    uvicorn.run(
+        "app:app",
+        host="127.0.0.1",
+        port=8000,
+        reload=True
+    )
+
+
+if __name__ == "__main__":
+    main()

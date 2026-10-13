@@ -3,4 +3,3 @@
 __pycache__/
 *.pyc
 # Local extraction script
-chatgpt_extractor.py
